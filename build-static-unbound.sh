@@ -49,7 +49,7 @@ cd $WORKSPACE
 curl -s https://www.nlnetlabs.nl/downloads/unbound/unbound-1.24.0.tar.gz | tar x --gzip
 cd unbound-1.24.0
 LDFLAGS="-static --static -no-pie -s -lngtcp2_crypto_ossl -lnghttp3 -lnghttp2 -lexpat -lcrypto -lssl -lc" \
- ./configure --with-libevent --with-libexpat --with-ssl --enable-dnscrypt --enable-ipset \
+ ./configure --with-libevent --with-libexpat=/usr --with-ssl --enable-dnscrypt --enable-ipset \
  --enable-dnstap --enable-dnscrypt --with-libmnl --enable-subnet --prefix=/usr/local/unboundmm \
  --with-libnghttp2 --with-libngtcp2
  make
