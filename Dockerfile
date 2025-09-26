@@ -12,7 +12,7 @@ RUN apk add --no-cache \
  python3-dev curl protobuf-c-dev nghttp2-dev nghttp2-static \
  libevent-dev libevent-static libmnl-dev libmnl-static \
  libsodium-dev libsodium-static expat-dev expat-static \
- openssl-libs-static openssl-dev bash \
+ openssl-libs-static openssl-dev bash xz \
  git libtool autoconf automake g++ cmake ninja jemalloc-dev jemalloc-static
  
 
