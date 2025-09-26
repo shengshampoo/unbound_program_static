@@ -24,11 +24,31 @@ LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr
 make
 make install
 
+# nghttp3
+cd $WORKSPACE
+git clone https://github.com/ngtcp2/nghttp3.git
+cd nghttp3
+git submodule update --init --recursive
+autoreconf -i
+LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --enable-lib-only
+make
+make install
+
+# ngtcp2
+cd $WORKSPACE
+git clone https://github.com/ngtcp2/ngtcp2.git
+cd ngtcp2
+git submodule update --init --recursive
+autoreconf -i
+LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --enable-lib-only --with-libbrotlienc --with-libbrotlidec
+make
+make install
+
 # unbound
 cd $WORKSPACE
 curl -s https://www.nlnetlabs.nl/downloads/unbound/unbound-1.24.0.tar.gz | tar x --gzip
 cd unbound-1.24.0
-LDFLAGS="-static --static -no-pie -s" \
+LDFLAGS="-static --static -no-pie -s -lngtcp2_crypto_ossl -lnghttp3 -lnghttp2 -lexpat -lcrypto -lssl -lc" \
  ./configure --with-libevent --with-libexpat=/usr --with-ssl --enable-dnscrypt --enable-ipset \
  --enable-dnstap --enable-dnscrypt --with-libmnl --enable-subnet --prefix=/usr/local/unboundmm \
  --with-libnghttp2
