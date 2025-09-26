@@ -13,7 +13,8 @@ RUN apk add --no-cache \
  libevent-dev libevent-static libmnl-dev libmnl-static \
  libsodium-dev libsodium-static expat-dev expat-static \
  openssl-libs-static openssl-dev bash \
- git libtool autoconf automake g++ cmake ninja jemalloc-dev jemalloc-static
+ git libtool autoconf automake g++ cmake ninja jemalloc-dev jemalloc-static \
+ nghttp3-dev nghttp3-static ngtcp2-dev ngtcp2-static
 
 ENV XZ_OPT=-e9
 COPY build-static-unbound.sh build-static-unbound.sh
