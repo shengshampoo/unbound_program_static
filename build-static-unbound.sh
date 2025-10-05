@@ -44,14 +44,24 @@ LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --enable-lib-onl
 make
 make install
 
+# libevent
+cd $WORKSPACE
+git clone https://github.com/libevent/libevent.git
+cd libevent
+mkdir build
+cd build
+cmake -G Ninja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SHARED_LIBS=OFF ..
+ninja
+ninja install
+
 # unbound
 cd $WORKSPACE
 curl -s https://www.nlnetlabs.nl/downloads/unbound/unbound-1.24.0.tar.gz | tar x --gzip
 cd unbound-1.24.0
-LDFLAGS="-static --static -no-pie -s -lngtcp2_crypto_ossl -lnghttp3 -lnghttp2 -lexpat -lcrypto -lssl -lc" \
- ./configure --with-libevent --with-libexpat=/usr --with-ssl --enable-dnscrypt --enable-ipset \
- --enable-dnstap --enable-dnscrypt --with-libmnl --enable-subnet --prefix=/usr/local/unboundmm \
- --with-libnghttp2
+LDFLAGS="-levent_pthreads -levent_openssl -levent_extra -levent_core -levent -lngtcp2 -lngtcp2_crypto_ossl -lnghttp3 -lnghttp2 -lexpat -lssl -lcrypto -lc" \
+ ./configure --with-libevent=/usr --with-libexpat=/usr --with-ssl=/usr --enable-dnscrypt --enable-ipset --enable-dnstap --enable-dnscrypt --with-libmnl --enable-subnet \
+ --prefix=/usr/local/unboundmm --with-libnghttp2=/usr --with-libngtcp2=/usr --enable-fully-static
+ sed -i 's@LDFLAGS=@LDFLAGS=-static --static -no-pie -s @g'  ./Makefile
  make
  make install
 
