@@ -30,7 +30,7 @@ git clone https://github.com/ngtcp2/nghttp3.git
 cd nghttp3
 git submodule update --init --recursive
 autoreconf -i
-LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --enable-lib-only
+./configure --prefix=/usr --enable-lib-only
 make
 make install
 
@@ -40,7 +40,7 @@ git clone https://github.com/ngtcp2/ngtcp2.git
 cd ngtcp2
 git submodule update --init --recursive
 autoreconf -i
-LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --enable-lib-only --with-libbrotlienc --with-libbrotlidec
+./configure --prefix=/usr --enable-lib-only --with-libbrotlienc --with-libbrotlidec
 make
 make install
 
