@@ -56,8 +56,8 @@ ninja install
 
 # unbound
 cd $WORKSPACE
-curl -s https://www.nlnetlabs.nl/downloads/unbound/unbound-1.24.0.tar.gz | tar x --gzip
-cd unbound-1.24.0
+curl -s https://www.nlnetlabs.nl/downloads/unbound/unbound-1.24.1.tar.gz | tar x --gzip
+cd unbound-1.24.1
 LDFLAGS="-levent_pthreads -levent_openssl -levent_extra -levent_core -levent -lngtcp2 -lngtcp2_crypto_ossl -lnghttp3 -lnghttp2 -lexpat -lssl -lcrypto -lc" \
  ./configure --with-libevent=/usr --with-libexpat=/usr --with-ssl=/usr --enable-dnscrypt --enable-ipset --enable-dnstap --enable-dnscrypt --with-libmnl --enable-subnet \
  --prefix=/usr/local/unboundmm --with-libnghttp2=/usr --with-libngtcp2=/usr --enable-fully-static
